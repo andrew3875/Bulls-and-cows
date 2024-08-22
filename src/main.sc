@@ -1,3 +1,4 @@
+require: scripts/functions.js
 init:
     script:
         function generateNumber() {
