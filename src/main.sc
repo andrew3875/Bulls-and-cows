@@ -2,6 +2,7 @@ require: scripts/functions.js
 theme: /
     
     state: start
+        #a: Добро пожаловать в игру "Быки и коровы"! Угадай 4-значное число. Введи "начать" для начала игры.
         q!: (начать|играть|давай играть|сыграем|новая игра)
         script:
             $session.secretNumber = generateNumber();
