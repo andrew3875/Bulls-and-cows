@@ -1,16 +1,19 @@
 require: scripts/functions.js
 theme: /
     
-    state: start
-        #a: Добро пожаловать в игру "Быки и коровы"! Угадай 4-значное число. Введи "начать" для начала игры.
+    state: Greeting
+        q!: $regex</start>
+        a: Привет! Предлагаю сыграть в игру "Быки и коровы". Угадай 4-значное число. Введи "начать" для начала игры.
+    
+    state: Start
         q!: (начать|играть|давай играть|сыграем|новая игра)
         script:
             $session.secretNumber = generateNumber();
             $session.attempts = 0;
         a: Игра началась! Я загадал 4-значное число {{$session.secretNumber}}. Попробуй угадать!
-        go: guess
+        go: Guess
 
-    state: guess
+    state: Guess
         q!: $regex<^\d{4}$>
         script:
             $session.attempts += 1;
@@ -36,13 +39,13 @@ theme: /
             $temp.bulls = bulls;
             $temp.cows = cows;
         if: $session.won
-            a: Поздравляю! Ты угадал число {{ $session.secretNumber }} за {{ $session.attempts }} попыток. Хотите сыграть еще раз?
-            go: start
+            a: Поздравляю! Ты угадал число {{ $session.secretNumber }} за {{ $session.attempts }} попыток. Введи "начать" для новой игры.
+            go: Start
         else:
-            a: Быки: {{ $temp.bulls }}, Коровы: {{ $temp.cows }}. Попробуй еще раз!
-            go: guess
+            a: Быки: {{ $temp.bulls }}, коровы: {{ $temp.cows }}. Попробуй еще раз!
+            go: Guess
 
-    state: fallback
+    state: Error
         q!: *
         a: Я тебя не понимаю. Введи 4-значное число или скажи "начать" для новой игры.
-        go: guess
+        go: Guess
