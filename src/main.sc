@@ -10,7 +10,7 @@ theme: /
         script:
             $session.secretNumber = generateNumber();
             $session.attempts = 0;
-        a: Игра началась! Я загадал 4-значное число {{$session.secretNumber}}. Попробуй угадать!
+        a: Игра началась! Я загадал 4-значное число. Попробуй угадать!
         go: Guess
 
     state: Guess
