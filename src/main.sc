@@ -51,6 +51,7 @@ theme: /
         q!: *
         if: $session.won
             a: Введи start для новой игры.
+            go: Start
         else:
             a: Пожалуйста, введи 4-значное число.
             go: Guess
