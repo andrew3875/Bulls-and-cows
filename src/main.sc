@@ -11,7 +11,7 @@ theme: /
             $session.won = false;
             $session.secretNumber = generateNumber();
         a: Привет! Давай сыграем в "Быки и коровы". Я загадал 4-значное число {{ $session.secretNumber }}. Попробуй угадать его. Введи своё первое предположение!
-        go: Start/Guess
+        go: Guess
 
     state: Guess
         q: $regex<^\d{4}$>
@@ -44,9 +44,14 @@ theme: /
         else:
             a: Быки: {{ $temp.bulls }}, коровы: {{ $temp.cows }}. Попробуй ещё раз!
             go: Guess
+            
     
 
     state: InvalidInput
         q!: *
-        a: Пожалуйста, введи 4-значное число. Попробуй ещё раз!
-        go: Guess    
+        if: $session.won
+            a: Введи start для новой игры.
+        else:
+            a: Пожалуйста, введи 4-значное число.
+            go: Guess
+    
