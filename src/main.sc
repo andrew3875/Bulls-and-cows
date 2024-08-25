@@ -43,7 +43,6 @@ theme: /
         else:
             a: Быки: {{ $temp.bulls }}, коровы: {{ $temp.cows }}. Попробуй ещё раз!
 
-    
     state: InvalidInput
         q!: * 
         if: $session.won
